@@ -1,9 +1,10 @@
 """
 A script to test the functionality of the Node class.
 """
+
 from unittest import TestCase
 
-from node import Node
+from node import DoubleLinkNode
 
 
 class TestNode(TestCase):
@@ -18,7 +19,7 @@ class TestNode(TestCase):
         Returns:
             None
         """
-        node = Node(5)
+        node = DoubleLinkNode(5)
         self.assertEqual(5, node.data)  # first arg is expected, second is actual
         self.assertIsNone(node.prev)  # node has no predecessor
         self.assertIsNone(node.next)  # node has no successor
@@ -33,9 +34,9 @@ class TestNode(TestCase):
         Returns:
             None
         """
-        node1 = Node(5)
-        self.assertEqual(node1, Node(5))  # equal to another node with the same data
+        node1 = DoubleLinkNode(5)
+        self.assertEqual(node1, DoubleLinkNode(5))  # equal to another node with the same data
         self.assertNotEqual(
-            node1, Node(6)
+            node1, DoubleLinkNode(6)
         )  # not equal to another node with different data
         self.assertNotEqual(node1, None)  # not equal to None

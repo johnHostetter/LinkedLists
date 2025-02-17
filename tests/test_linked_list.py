@@ -1,10 +1,18 @@
+"""
+A module to test the SingleLinkedList class.
+"""
+
 from unittest import TestCase
 
-from node import Node
+from node import Node, SingleLinkNode
 from linked_list import SingleLinkedList
 
 
 class TestSingleLinkedList(TestCase):
+    """
+    A TestCase class to help ensure the SingleLinkedList class is functional as expected.
+    """
+
     def test_empty_linked_list(self) -> None:
         """
         Test the creation of an empty SingleLinkedList object. This method should create a linked
@@ -24,7 +32,7 @@ class TestSingleLinkedList(TestCase):
             None
         """
         linked_list = SingleLinkedList()
-        linked_list.head = Node(5)
+        linked_list.head = SingleLinkNode(5)
         self.assertFalse(linked_list.is_empty)
         self.assertEqual(linked_list.size, 1)
         self.assertEqual("[5]", str(linked_list))
@@ -41,14 +49,14 @@ class TestSingleLinkedList(TestCase):
             None
         """
         linked_list = SingleLinkedList()
-        linked_list.head = Node(5)
-        linked_list.head.next = Node(6)
-        linked_list.head.next.next = Node(7)
+        linked_list.head = SingleLinkNode(5)
+        linked_list.head.next = SingleLinkNode(6)
+        linked_list.head.next.next = SingleLinkNode(7)
         self.assertFalse(linked_list.is_empty)
         self.assertEqual(linked_list.size, 3)
         self.assertEqual("[5, 6, 7]", str(linked_list))
         self.assertEqual("[5, 6, 7]", repr(linked_list))
-        self.assertEqual(hash((Node(5), Node(6), Node(7))), hash(linked_list))
+        self.assertEqual(hash((SingleLinkNode(5), SingleLinkNode(6), SingleLinkNode(7))), hash(linked_list))
 
     def test_linked_list_equality(self) -> None:
         """
@@ -58,14 +66,14 @@ class TestSingleLinkedList(TestCase):
             None
         """
         linked_list1 = SingleLinkedList()
-        linked_list1.head = Node(5)
-        linked_list1.head.next = Node(6)
-        linked_list1.head.next.next = Node(7)
+        linked_list1.head = SingleLinkNode(5)
+        linked_list1.head.next = SingleLinkNode(6)
+        linked_list1.head.next.next = SingleLinkNode(7)
 
         linked_list2 = SingleLinkedList()
-        linked_list2.head = Node(5)
-        linked_list2.head.next = Node(6)
-        linked_list2.head.next.next = Node(7)
+        linked_list2.head = SingleLinkNode(5)
+        linked_list2.head.next = SingleLinkNode(6)
+        linked_list2.head.next.next = SingleLinkNode(7)
 
         self.assertEqual(linked_list1, linked_list2)
         self.assertNotEqual(linked_list1, SingleLinkedList())
@@ -79,13 +87,13 @@ class TestSingleLinkedList(TestCase):
             None
         """
         linked_list1 = SingleLinkedList()
-        linked_list1.head = Node(5)
-        linked_list1.head.next = Node(6)
-        linked_list1.head.next.next = Node(7)
+        linked_list1.head = SingleLinkNode(5)
+        linked_list1.head.next = SingleLinkNode(6)
+        linked_list1.head.next.next = SingleLinkNode(7)
 
         linked_list2 = SingleLinkedList()
-        linked_list2.head = Node(5)
-        linked_list2.head.next = Node(6)
+        linked_list2.head = SingleLinkNode(5)
+        linked_list2.head.next = SingleLinkNode(6)
 
         self.assertNotEqual(linked_list1, linked_list2)
         self.assertNotEqual(linked_list1, SingleLinkedList())
@@ -100,7 +108,7 @@ class TestSingleLinkedList(TestCase):
             None
         """
         linked_list = SingleLinkedList()
-        linked_list.head = Node(5)
+        linked_list.head = SingleLinkNode(5)
         linked_list.insert_at_head(4)
         self.assertEqual(linked_list.size, 2)
         self.assertEqual("[4, 5]", str(linked_list))
@@ -152,7 +160,9 @@ class TestSingleLinkedList(TestCase):
         self.assertEqual("[5, 4, 6, 7]", repr(linked_list))
         self.assertEqual(hash((Node(5), Node(4), Node(6), Node(7))), hash(linked_list))
 
-    def check_assertions_on_empty_linked_list(self, linked_list: SingleLinkedList) -> None:
+    def check_assertions_on_empty_linked_list(
+        self, linked_list: SingleLinkedList
+    ) -> None:
         """
         Check that all the assertions that should be true for an empty linked list are true.
 
@@ -263,7 +273,9 @@ class TestSingleLinkedList(TestCase):
         for i in range(3):
             self.assertEqual(linked_list[i], items[i])
         with self.assertRaises(IndexError):
-            print(linked_list[3])  # should raise an IndexError because the index is out of bounds
+            print(
+                linked_list[3]
+            )  # should raise an IndexError because the index is out of bounds
 
     def test_linked_list_comparison(self) -> None:
         """
@@ -272,19 +284,72 @@ class TestSingleLinkedList(TestCase):
         Returns:
             None
         """
-        linked_list1 = SingleLinkedList()
-        linked_list1.head = Node(5)
-        linked_list1.head.next = Node(6)
-        linked_list1.head.next.next = Node(7)
+        linked_list_1 = SingleLinkedList(5, 6, 7)
+        linked_list_2 = SingleLinkedList(5, 6, 8)
 
-        linked_list2 = SingleLinkedList()
-        linked_list2.head = Node(5)
-        linked_list2.head.next = Node(6)
-        linked_list2.head.next.next = Node(8)
+        self.assertLessEqual(linked_list_1, linked_list_2)
+        self.assertGreaterEqual(linked_list_2, linked_list_1)
+        # modify linked_list_1 to be less than linked_list_2
+        linked_list_1[0], linked_list_1[1] = 4, 5
+        self.assertLess(linked_list_1, linked_list_2)
+        self.assertGreater(linked_list_2, linked_list_1)
 
-        self.assertLessEqual(linked_list1, linked_list2)
-        self.assertGreaterEqual(linked_list2, linked_list1)
-        # modify linked_list1 to be less than linked_list2
-        linked_list1[0], linked_list1[1] = 4, 5
-        self.assertLess(linked_list1, linked_list2)
-        self.assertGreater(linked_list2, linked_list1)
+    def test_get_items_index_slicing(self) -> None:
+        """
+        Test the index slicing of SingleLinkedList objects. This method should return the
+        appropriate sublist of the linked list. However, it is important to note two major points:
+
+        1. The slicing does not modify the original linked list, or return a new linked list; it
+        returns a list of the nodes at the given indices.
+        2. This is not a typical operation for a linked list, but it is useful for testing and
+        illustrating how a linked list can be sliced.
+
+        How is this possible? The __getitem__ method of the SingleLinkedList class is implemented
+        to return a list of the nodes at the given indices (see "if isinstance(item, slice)").
+
+        Returns:
+            None
+        """
+        items = [5, 6, 7, 8, 9]
+        linked_list = SingleLinkedList(*items)
+        self.assertEqual(items[0:2], linked_list[0:2])
+        self.assertEqual(items[1:], linked_list[1:])
+        self.assertEqual(items[:2], linked_list[:2])
+        self.assertEqual(items[:], linked_list[:])
+        self.assertEqual(items[1:1], linked_list[1:1])
+        self.assertEqual(items[1:0], linked_list[1:0])
+        self.assertEqual(items[1:3], linked_list[1:3])
+
+    def test_set_items_index_slicing(self) -> None:
+        """
+        Test the setting of items using index slicing in SingleLinkedList objects. This method
+        should set the nodes at the given indices to the given values. However, it is important to
+        note two major points:
+
+        1. The slicing does modify the original linked list; it sets the nodes at the given
+        indices to the given values.
+        2. This is not a typical operation for a linked list, but it is useful for testing and
+        illustrating how a linked list can be sliced.
+
+        How is this possible? The __setitem__ method of the SingleLinkedList class is implemented
+        to set the nodes at the given indices to the given values (see "if isinstance(key, slice)").
+
+        Returns:
+            None
+        """
+        items = [5, 6, 7, 8, 9]
+        linked_list = SingleLinkedList(*items)
+        linked_list[0:2] = [4, 5]
+        self.assertEqual("[4, 5, 7, 8, 9]", str(linked_list))
+        linked_list[1:] = [6, 7, 8, 9]
+        self.assertEqual("[4, 6, 7, 8, 9]", str(linked_list))
+        linked_list[:2] = [5, 6]
+        self.assertEqual("[5, 6, 7, 8, 9]", str(linked_list))
+        linked_list[:] = [5, 6, 7, 8, 9]
+        self.assertEqual("[5, 6, 7, 8, 9]", str(linked_list))
+        linked_list[1:1] = [6]
+        self.assertEqual("[5, 6, 7, 8, 9]", str(linked_list))
+        linked_list[1:0] = [6]
+        self.assertEqual("[5, 6, 7, 8, 9]", str(linked_list))
+        linked_list[1:3] = [6, 7]
+        self.assertEqual("[5, 6, 7, 8, 9]", str(linked_list))
