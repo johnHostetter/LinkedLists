@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "linked-lists"
+version = "0.0.1"
+authors = [
+  { name="John Wesley Hostetter", email="jhostetter16@gmail.com" },
+]
+description = "The linked-lists library provides a custom implementation of the linked lists data structure."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/johnHostetter/LinkedLists"
+Issues = "https://github.com/johnHostetter/LinkedLists/issues"
+
+[tool.hatch.build]
+include = [
+    "src/linked_list/**",
+    "src/node/**",
+    "README.md",
+    "LICENSE",
+]
+exclude = [
+    "tests/**",
+    "*.pyc",
+    "*.pyo",
+    ".git/**",
+    "build/**",
+    "dist/**",
+    ".venv/**",
+]
+# Ignore VCS
+ignore = ["*.git", "*.hg", ".git/**", ".hg/**"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/linked_list", "src/node"]

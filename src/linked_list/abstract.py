@@ -1,7 +1,21 @@
+"""
+This module contains an abstract base class for linked lists. The linked list may be iterated over
+to access each node in the list. It also provides a string representation of the linked list.
+
+Some operations, such as queries or modifying operations, are not implemented in this class.
+Instead, they are implemented in the concrete classes that inherit from this class. This is because
+the implementation of these operations may differ between linked list types, such as singly linked
+lists and doubly linked lists.
+"""
+
 import abc
 from typing import Union, List
 
-from node import Node, SingleLinkNode, DoubleLinkNode  # this is the Node class from the node.py module we created
+from node import (
+    Node,
+    SingleLinkNode,
+    DoubleLinkNode,
+)  # this is the Node class from the node.py module we created
 
 
 class LinkedList(abc.ABC):
@@ -13,7 +27,9 @@ class LinkedList(abc.ABC):
     """
 
     def __init__(self, *args) -> None:
-        self.head: Union[None, SingleLinkNode, DoubleLinkNode] = None  # all linked lists have a head node
+        self.head: Union[None, SingleLinkNode, DoubleLinkNode] = (
+            None  # all linked lists have a head node
+        )
         for data in args:
             self.insert_at_tail(data)
 

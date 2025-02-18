@@ -5,6 +5,8 @@ in a single and doubly linked list, respectively.
 
 from typing import Union
 
+# note: both "src.node.abstract import Node" and "from node.abstract import Node" are valid,
+# but will change isinstance behavior depending on the import statement used; stay consistent
 from node.abstract import Node
 
 
@@ -23,15 +25,12 @@ class SingleLinkNode(Node):
         self.next: Union[None, Node] = None
 
 
-class DoubleLinkNode(Node):
+class DoubleLinkNode(SingleLinkNode):
     """
     A node in a doubly linked list. Each node has a reference to the data it stores, the node before
     it, and the node after it. If there is no node before or after it, the reference is None. The
     prev attribute is used to reference the node before the current node. The next attribute is used
     to reference the node after the current node.
-
-    Note: This could have inherited from SingleLinkNode, but it is kept separate for clarity and
-    to simplify the inheritance hierarchy.
 
     Attributes:
         data: The data stored in the node.
@@ -42,4 +41,3 @@ class DoubleLinkNode(Node):
     def __init__(self, data: object) -> None:
         super().__init__(data)
         self.prev: Union[None, Node] = None
-        self.next: Union[None, Node] = None

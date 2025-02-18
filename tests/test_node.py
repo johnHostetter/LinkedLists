@@ -2,12 +2,12 @@
 A script to test the functionality of the Node class.
 """
 
-from unittest import TestCase
+import unittest
 
 from node import DoubleLinkNode
 
 
-class TestNode(TestCase):
+class TestNode(unittest.TestCase):
     """
     A TestCase class to help ensure the Node class is functional as expected.
     """
@@ -20,7 +20,7 @@ class TestNode(TestCase):
             None
         """
         node = DoubleLinkNode(5)
-        self.assertEqual(5, node.data)  # first arg is expected, second is actual
+        self.assertEqual(5, node)  # first arg is expected, second is actual
         self.assertIsNone(node.prev)  # node has no predecessor
         self.assertIsNone(node.next)  # node has no successor
         self.assertEqual("5", str(node))  # first arg is expected, second is actual
@@ -35,8 +35,14 @@ class TestNode(TestCase):
             None
         """
         node1 = DoubleLinkNode(5)
-        self.assertEqual(node1, DoubleLinkNode(5))  # equal to another node with the same data
+        self.assertEqual(
+            node1, DoubleLinkNode(5)
+        )  # equal to another node with the same data
         self.assertNotEqual(
             node1, DoubleLinkNode(6)
         )  # not equal to another node with different data
         self.assertNotEqual(node1, None)  # not equal to None
+
+
+if __name__ == "__main__":
+    unittest.main()

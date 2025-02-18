@@ -1,5 +1,5 @@
 """
-Node module for linked list implementation.
+Module for the implementation of nodes to be used in linked-based data structures.
 
 This code simplifies the subsequent import statements in other modules. For example, instead of
 importing the Node class from the abstract module, you can import it directly from the node module.
