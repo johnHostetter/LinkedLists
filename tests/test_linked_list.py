@@ -13,6 +13,10 @@ class TestLinkedList(unittest.TestCase):
     """
     A TestCase class to help ensure the linked list classes are functional.
     """
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self.node_types: Tuple[Node] = (SingleLinkNode, DoubleLinkNode)
+        self.lst_types: Tuple[LinkedList] = (SingleLinkedList, DoubleLinkedList)
 
     def test_empty_linked_list(self) -> None:
         """
@@ -22,7 +26,7 @@ class TestLinkedList(unittest.TestCase):
         Returns:
             None
         """
-        for lst_type in [SingleLinkedList, DoubleLinkedList]:
+        for lst_type in self.lst_types:
             linked_list = lst_type()
             self.check_assertions_on_empty_linked_list(linked_list)
 
@@ -33,9 +37,7 @@ class TestLinkedList(unittest.TestCase):
         Returns:
             None
         """
-        node_types: Tuple[Node] = (SingleLinkNode, DoubleLinkNode)
-        lst_types: Tuple[LinkedList] = (SingleLinkedList, DoubleLinkedList)
-        for node_type, lst_type in zip(node_types, lst_types):  # type: ignore
+        for node_type, lst_type in zip(self.node_types, self.lst_types):  # type: ignore
             linked_list = lst_type()
             linked_list.head = node_type(5)
             self.assertFalse(linked_list.is_empty)
@@ -75,7 +77,7 @@ class TestLinkedList(unittest.TestCase):
         Returns:
             None
         """
-        for lst_type in [SingleLinkedList, DoubleLinkedList]:
+        for lst_type in self.lst_types:
             linked_list = lst_type(5, 6, 7)
             self.assertEqual(linked_list.size, 3)
             self.assertEqual("[5, 6, 7]", str(linked_list))
@@ -89,7 +91,7 @@ class TestLinkedList(unittest.TestCase):
         Returns:
             None
         """
-        for lst_type in [SingleLinkedList, DoubleLinkedList]:
+        for lst_type in self.lst_types:
             linked_list1 = lst_type(5, 6, 7)
             linked_list2 = lst_type(5, 6, 7)
 
@@ -104,7 +106,7 @@ class TestLinkedList(unittest.TestCase):
         Returns:
             None
         """
-        for lst_type in [SingleLinkedList, DoubleLinkedList]:
+        for lst_type in self.lst_types:
             linked_list1 = lst_type(5, 6, 7)
             linked_list2 = lst_type(5, 6)
 
@@ -120,7 +122,7 @@ class TestLinkedList(unittest.TestCase):
         Returns:
             None
         """
-        for lst_type in [SingleLinkedList, DoubleLinkedList]:
+        for lst_type in self.lst_types:
             linked_list = lst_type()
             linked_list.insert_at_head(5)
             self.assertEqual(linked_list.size, 1)
@@ -136,7 +138,7 @@ class TestLinkedList(unittest.TestCase):
         Returns:
             None
         """
-        for lst_type in [SingleLinkedList, DoubleLinkedList]:
+        for lst_type in self.lst_types:
             linked_list = lst_type(5, 6)
             linked_list.insert_at_tail(7)
             self.assertEqual(linked_list.size, 3)
@@ -152,7 +154,7 @@ class TestLinkedList(unittest.TestCase):
         Returns:
             None
         """
-        for lst_type in [SingleLinkedList, DoubleLinkedList]:
+        for lst_type in self.lst_types:
             linked_list = lst_type(5, 6, 7)
             linked_list.insert_at_index(4, 1)
             self.assertEqual(linked_list.size, 4)
@@ -194,7 +196,7 @@ class TestLinkedList(unittest.TestCase):
         Returns:
             None
         """
-        for lst_type in [SingleLinkedList, DoubleLinkedList]:
+        for lst_type in self.lst_types:
             linked_list = lst_type(5, 6, 7)
             linked_list.remove_at_head()
             self.assertEqual(linked_list.size, 2)
@@ -217,7 +219,7 @@ class TestLinkedList(unittest.TestCase):
         Returns:
             None
         """
-        for lst_type in [SingleLinkedList, DoubleLinkedList]:
+        for lst_type in self.lst_types:
             linked_list = lst_type(5, 6, 7)
             linked_list.remove_at_tail()
             self.assertEqual(linked_list.size, 2)
@@ -240,7 +242,7 @@ class TestLinkedList(unittest.TestCase):
         Returns:
             None
         """
-        for lst_type in [SingleLinkedList, DoubleLinkedList]:
+        for lst_type in self.lst_types:
             linked_list = lst_type(5, 6, 7)
             linked_list.remove_at_index(1)
             self.assertEqual(linked_list.size, 2)
@@ -263,7 +265,7 @@ class TestLinkedList(unittest.TestCase):
             None
         """
         items = [5, 6, 7]
-        for lst_type in [SingleLinkedList, DoubleLinkedList]:
+        for lst_type in self.lst_types:
             linked_list = lst_type(*items)
             self.assertEqual([node.data for node in linked_list], items)
 
@@ -275,7 +277,7 @@ class TestLinkedList(unittest.TestCase):
             None
         """
         items = [5, 6, 7]
-        for lst_type in [SingleLinkedList, DoubleLinkedList]:
+        for lst_type in self.lst_types:
             linked_list = lst_type(*items)
             for i in range(3):
                 self.assertEqual(linked_list[i], items[i])
@@ -291,7 +293,7 @@ class TestLinkedList(unittest.TestCase):
         Returns:
             None
         """
-        for lst_type in [SingleLinkedList, DoubleLinkedList]:
+        for lst_type in self.lst_types:
             linked_list_1 = lst_type(5, 6, 7)
             linked_list_2 = lst_type(5, 6, 8)
 
@@ -319,7 +321,7 @@ class TestLinkedList(unittest.TestCase):
             None
         """
         items = [5, 6, 7, 8, 9]
-        for lst_type in [SingleLinkedList, DoubleLinkedList]:
+        for lst_type in self.lst_types:
             linked_list = lst_type(*items)
             self.assertEqual(items[0:2], linked_list[0:2])
             self.assertEqual(items[1:], linked_list[1:])
@@ -347,7 +349,7 @@ class TestLinkedList(unittest.TestCase):
             None
         """
         items = [5, 6, 7, 8, 9]
-        for lst_type in [SingleLinkedList, DoubleLinkedList]:
+        for lst_type in self.lst_types:
             linked_list = lst_type(*items)
             linked_list[0:2] = [4, 5]
             self.assertEqual("[4, 5, 7, 8, 9]", str(linked_list))
