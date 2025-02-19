@@ -13,6 +13,7 @@ Classes:
 """
 
 from .abstract import LinkedList
-from .impl import SingleLinkedList, DoubleLinkedList
+from .impl.single import SingleLinkedList
+from .impl.double import DoubleLinkedList
 
 __all__ = ["LinkedList", "SingleLinkedList", "DoubleLinkedList"]

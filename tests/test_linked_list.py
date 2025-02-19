@@ -13,6 +13,7 @@ class TestLinkedList(unittest.TestCase):
     """
     A TestCase class to help ensure the linked list classes are functional.
     """
+
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.node_types: Tuple[Node] = (SingleLinkNode, DoubleLinkNode)
