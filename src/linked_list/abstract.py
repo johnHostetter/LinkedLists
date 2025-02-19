@@ -34,10 +34,8 @@ class LinkedList(abc.ABC):
             self.insert_at_tail(data)
 
     def __iter__(self) -> iter:
-        curr: Union[None, SingleLinkNode, DoubleLinkNode] = self.head
-        while curr is not None:
-            yield curr
-            curr = curr.next
+        # TODO: ADD YOUR CODE HERE
+        pass
 
     def __getitem__(self, key) -> Union[Node, List[Node]]:
         """
@@ -256,10 +254,9 @@ class LinkedList(abc.ABC):
         Returns:
             The number of nodes in the linked list.
         """
-        count: int = 0
-        for _ in self:  # we can use the __iter__ method to iterate over the nodes
-            count += 1
-        return count
+
+        # TODO: ADD YOUR CODE HERE
+        pass
 
     @property
     def is_empty(self) -> bool:

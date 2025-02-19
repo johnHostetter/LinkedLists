@@ -25,7 +25,7 @@ class SingleLinkedList(LinkedList):
 
     def __last_nodes(
         self,
-    ) -> Tuple[Union[None, SingleLinkNode], Union[None, SingleLinkNode]]: 
+    ) -> Tuple[Union[None, SingleLinkNode], Union[None, SingleLinkNode]]:  # given
         """
         Get the last node and the node before the last node in the linked list.
 
@@ -45,7 +45,7 @@ class SingleLinkedList(LinkedList):
             curr = curr.next
         return curr, predecessor
 
-    def insert_at_head(self, data: object) -> None: 
+    def insert_at_head(self, data: object) -> None:  # worked-example
         """
         Insert a new node with the given data at the head of the linked list.
 
@@ -60,21 +60,22 @@ class SingleLinkedList(LinkedList):
                 "Cannot insert a Node object. "
                 "Insert the data instead if this was intended behavior."
             )
-        
-        # TODO: ADD YOUR CODE HERE
 
-    def remove_at_head(self) -> None: 
+        new_node = SingleLinkNode(data)
+        new_node.next = self.head
+        self.head = new_node
+
+    def remove_at_head(self) -> None:  # problem-solving
         """
         Remove the node at the head of the linked list, if it exists.
 
         Returns:
             None
         """
+        if self.head is not None:
+            self.head = self.head.next
 
-        # TODO: ADD YOUR CODE HERE
-        pass
-
-    def insert_at_tail(self, data: object) -> None:  
+    def insert_at_tail(self, data: object) -> None:  # collaboration
         """
         Insert a new node with the given data at the tail of the linked list.
 
@@ -84,30 +85,61 @@ class SingleLinkedList(LinkedList):
         Returns:
             None
         """
+        new_node: SingleLinkNode = SingleLinkNode(data)
+        if self.head is None:
+            self.head = new_node
+            return
 
-        # TODO: ADD YOUR CODE HERE
-        pass
+        last_node, _ = self.__last_nodes()
+        last_node.next = new_node
 
-    def remove_at_tail(self) -> None: 
-        # TODO: ADD YOUR CODE HERE
-        pass
+    def remove_at_tail(self) -> None:  # collaboration
+        # base case of empty list
+        if self.head is None:
+            return
 
-    def insert_at_index(self, data: object, index: int) -> None: 
+        # base case of single node list
+        if self.head.next is None:
+            self.head = None
+            return
+
+        # general case
+        _, next_to_last = self.__last_nodes()
+        next_to_last.next = None
+
+    def insert_at_index(self, data: object, index: int) -> None:  # parsons-problem
         if index < 0:
             raise IndexError("Index must be non-negative.")
-        
-        # TODO: ADD YOUR CODE HERE
+
+        if index == 0:
+            self.insert_at_head(data)
+            return
+
+        for idx, node in enumerate(self):
+            if idx == index - 1:
+                new_node = SingleLinkNode(data)
+                new_node.next = node.next
+                node.next = new_node
+                return
 
         # if we reach this point, the index is out of bounds (i.e., greater than the list's size)
         raise IndexError(
             f"Index {index} does not exist for {type(self).__name__} of size {self.size}."
         )
 
-    def remove_at_index(self, index: int) -> None: 
+    def remove_at_index(self, index: int) -> None:  # parsons-problem
         if index < 0:
             raise IndexError("Index must be non-negative.")
 
-        # TODO: ADD YOUR CODE HERE
+        if index == 0:
+            self.remove_at_head()
+            return
+
+        for idx, node in enumerate(self):
+            if idx == index - 1:
+                if node.next is not None:
+                    node.next = node.next.next
+                    return
 
         # if we reach this point, the index is out of bounds (i.e., greater than the list's size)
         raise IndexError(
