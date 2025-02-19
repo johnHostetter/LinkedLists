@@ -25,7 +25,7 @@ class SingleLinkedList(LinkedList):
 
     def __last_nodes(
         self,
-    ) -> Tuple[Union[None, SingleLinkNode], Union[None, SingleLinkNode]]: 
+    ) -> Tuple[Union[None, SingleLinkNode], Union[None, SingleLinkNode]]:
         """
         Get the last node and the node before the last node in the linked list.
 
@@ -45,7 +45,7 @@ class SingleLinkedList(LinkedList):
             curr = curr.next
         return curr, predecessor
 
-    def insert_at_head(self, data: object) -> None: 
+    def insert_at_head(self, data: object) -> None:
         """
         Insert a new node with the given data at the head of the linked list.
 
@@ -60,10 +60,10 @@ class SingleLinkedList(LinkedList):
                 "Cannot insert a Node object. "
                 "Insert the data instead if this was intended behavior."
             )
-        
+
         # TODO: ADD YOUR CODE HERE
 
-    def remove_at_head(self) -> None: 
+    def remove_at_head(self) -> None:
         """
         Remove the node at the head of the linked list, if it exists.
 
@@ -74,7 +74,7 @@ class SingleLinkedList(LinkedList):
         # TODO: ADD YOUR CODE HERE
         pass
 
-    def insert_at_tail(self, data: object) -> None:  
+    def insert_at_tail(self, data: object) -> None:
         """
         Insert a new node with the given data at the tail of the linked list.
 
@@ -88,14 +88,14 @@ class SingleLinkedList(LinkedList):
         # TODO: ADD YOUR CODE HERE
         pass
 
-    def remove_at_tail(self) -> None: 
+    def remove_at_tail(self) -> None:
         # TODO: ADD YOUR CODE HERE
         pass
 
-    def insert_at_index(self, data: object, index: int) -> None: 
+    def insert_at_index(self, data: object, index: int) -> None:
         if index < 0:
             raise IndexError("Index must be non-negative.")
-        
+
         # TODO: ADD YOUR CODE HERE
 
         # if we reach this point, the index is out of bounds (i.e., greater than the list's size)
@@ -103,7 +103,7 @@ class SingleLinkedList(LinkedList):
             f"Index {index} does not exist for {type(self).__name__} of size {self.size}."
         )
 
-    def remove_at_index(self, index: int) -> None: 
+    def remove_at_index(self, index: int) -> None:
         if index < 0:
             raise IndexError("Index must be non-negative.")
 
